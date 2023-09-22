@@ -1,6 +1,9 @@
 plugins {
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -36,10 +39,14 @@ android {
     buildFeatures{
         viewBinding = true
     }
+    kotlin {
+        jvmToolchain(8)
+    }
 }
 
 dependencies {
     val navVersion = "2.7.2"
+    val daggerHilt = "2.48"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,4 +58,13 @@ dependencies {
     //NavigationComponent
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:$daggerHilt")
+    kapt("com.google.dagger:hilt-android-compiler:$daggerHilt")
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
