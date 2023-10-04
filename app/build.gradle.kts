@@ -56,6 +56,8 @@ android {
 dependencies {
     val navVersion = "2.7.2"
     val daggerHilt = "2.48"
+    val retrofit = "2.9.0"
+    val cameraVersion = "1.2.3"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -71,13 +73,15 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$daggerHilt")
     kapt("com.google.dagger:hilt-android-compiler:$daggerHilt")
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.3.1")
-
-
-
-
+    //CameraX
+    implementation ("androidx.camera:camera-core:$cameraVersion")
+    implementation ("androidx.camera:camera-camera2:$cameraVersion")
+    implementation ("androidx.camera:camera-lifecycle:$cameraVersion")
+    implementation ("androidx.camera:camera-view:$cameraVersion")
+    implementation ("androidx.camera:camera-extensions:$cameraVersion")
 }
 
 // Allow references to generated code
