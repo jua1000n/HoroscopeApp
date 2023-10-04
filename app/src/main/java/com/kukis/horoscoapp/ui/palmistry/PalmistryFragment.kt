@@ -1,11 +1,16 @@
 package com.kukis.horoscoapp.ui.palmistry
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.kukis.horoscoapp.databinding.FragmentPalmistryBinding
@@ -20,8 +25,10 @@ class PalmistryFragment : Fragment() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-
+            Log.i("Camera", "Tiene permiso i need help")
+            startCamera()
         } else {
+            Log.i("Camera", "No tiene permisos")
             Toast.makeText(
                 requireContext(),
                 "No se puede usar esta opción sin permisos",
@@ -29,6 +36,28 @@ class PalmistryFragment : Fragment() {
             ).show()
         }
 
+    }
+
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+
+        cameraProviderFuture.addListener({
+            val cameraProvider:ProcessCameraProvider = cameraProviderFuture.get()
+
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            }
+
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                cameraProvider.unbindAll()
+
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+            } catch (e:Exception) {
+                Log.e("AppHoroscope", "Error en camera ${e.message}")
+            }
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     companion object {
@@ -39,10 +68,15 @@ class PalmistryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (checkCameraPermission()) {
-
+            startCamera()
         } else {
             requestPermissionLauncher.launch(CAMERA_PERMISSION)
         }
+        initUI()
+    }
+
+    private fun initUI() {
+
     }
 
     private fun checkCameraPermission(): Boolean {
