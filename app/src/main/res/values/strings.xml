@@ -20,6 +20,10 @@
     <string name="aquarius">Aquarius</string>
     <string name="pisces">Pisces</string>
     <string name="share">Share</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="new_photo">New Photo</string>
+    <string name="description_ivPalmistryPhoto">View the image take</string>
+    <string name="description_ivPalmistry">Image palm of the hand</string>
 
     <string name="luck_0">"A new opportunity will bring unexpected success your way."</string>
     <string name="luck_1">"You'll meet someone who will change your life for the better."</string>
