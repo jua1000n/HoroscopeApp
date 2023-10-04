@@ -86,3 +86,5 @@ v
 Fapp/src/main/java/com/kukis/horoscoapp/domain/model/PredictionModel.kt,6\9\694187cdf0f19d2b6ec9a869f4a02451ccaa3a30
 v
 Fapp/src/main/java/com/kukis/horoscoapp/domain/usecase/GetPrediction.kt,9\1\91cff44197abb48d9d4769bc63b218f50adcc713
+€
+Papp/src/main/java/com/kukis/horoscoapp/data/core/interceptors/AuthInterceptor.kt,0\b\0b4ebf42b2b93bf072e45be65b674d28efb74b63
